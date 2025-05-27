@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>TuneVault</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h1 class="logo">TuneVault</h1>
+            <nav>
+                <ul>
+                    <li class="active" data-section="home"><img src="assets/icons/home.svg" alt="Home"> Home</li>
+                    <li data-section="upload"><img src="assets/icons/upload.svg" alt="Upload"> Upload Songs</li>
+                    <li data-section="playlists"><img src="assets/icons/playlist.svg" alt="Playlists"> Playlists</li>
+                    <li data-section="now-playing"><img src="assets/icons/play.svg" alt="Now Playing"> Now Playing</li>
+                    <li data-section="settings"><img src="assets/icons/settings.svg" alt="Settings"> Settings</li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Home Page -->
+            <section id="home" class="section active">
+                <h2>Your Songs</h2>
+                <div class="search-filter-bar">
+                    <div class="search-bar">
+                        <img src="assets/icons/search.svg" alt="Search">
+                        <input type="text" id="search" placeholder="Search songs, artists, or playlists...">
+                    </div>
+                    <button id="filter-btn"><img src="assets/icons/filter.svg" alt="Filter"> Filter</button>
+                </div>
+                <div class="filter-options" id="filter-options" style="display: none;">
+                    <select id="filter-artist">
+                        <option value="">All Artists</option>
+                    </select>
+                    <select id="filter-album">
+                        <option value="">All Albums</option>
+                    </select>
+                </div>
+                <ul id="song-list" class="song-grid"></ul>
+            </section>
+            <!-- Upload Page -->
+            <section id="upload" class="section">
+                <h2>Upload Songs</h2>
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="song-upload" accept="audio/*" multiple style="display: none;">
+                    <div class="upload-placeholder">
+                        <img src="assets/icons/upload.svg" alt="Upload Icon">
+                        <h3>Drag & Drop Your Songs</h3>
+                        <p>Or click to browse files from your device</p>
+                        <button id="upload-btn">Browse Files</button>
+                    </div>
+                    <div class="upload-progress" id="upload-progress" style="display: none;">
+                        <p>Uploading: <span id="upload-file-name"></span></p>
+                        <progress id="upload-progress-bar" value="0" max="100"></progress>
+                    </div>
+                    <p class="upload-info">Supported formats: MP3, WAV | Max 100MB per file</p>
+                </div>
+                <ul id="uploaded-songs" class="song-grid"></ul>
+            </section>
+            <!-- Playlists Page -->
+            <section id="playlists" class="section">
+                <h2>Your Playlists</h2>
+                <button id="create-playlist">Create New Playlist</button>
+                <ul id="playlist-list" class="playlist-grid"></ul>
+            </section>
+            <!-- Now Playing Page -->
+            <section id="now-playing" class="section">
+                <h2>Now Playing</h2>
+                <div class="now-playing-container">
+                    <img id="now-playing-art" src="assets/images/default-album.png" alt="Album Art">
+                    <div class="now-playing-info">
+                        <h3 id="now-playing-title">Select a song</h3>
+                        <p id="now-playing-artist">Unknown Artist</p>
+                        <p id="now-playing-album">Unknown Album</p>
+                    </div>
+                    <div class="progress">
+                        <span id="now-playing-current">0:00</span>
+                        <input type="range" id="now-playing-progress" min="0" max="100" value="0">
+                        <span id="now-playing-duration">0:00</span>
+                    </div>
+                    <div class="now-playing-controls">
+                        <button id="shuffle-btn"><img src="assets/icons/shuffle.svg" alt="Shuffle"></button>
+                        <button id="prev-btn-large"><img src="assets/icons/previous.svg" alt="Previous"></button>
+                        <button id="play-pause-btn-large"><img src="assets/icons/play.svg" alt="Play"></button>
+                        <button id="next-btn-large"><img src="assets/icons/next.svg" alt="Next"></button>
+                        <button id="repeat-btn"><img src="assets/icons/repeat.svg" alt="Repeat"></button>
+                    </div>
+                    <div class="volume-control">
+                        <img src="assets/icons/volume.svg" alt="Volume">
+                        <input type="range" id="volume-bar" min="0" max="100" value="100">
+                    </div>
+                </div>
+            </section>
+            <!-- Settings Page -->
+            <section id="settings" class="section">
+                <h2>Settings</h2>
+                <div class="settings-container">
+                    <div class="setting-item">
+                        <label>Theme</label>
+                        <select id="theme-select">
+                            <option value="dark">Dark (Default)</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label>Storage Location</label>
+                        <p>External Storage (Default)</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>App Version</label>
+                        <p>1.0.0</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Mini Player -->
+        <footer class="player">
+            <img id="mini-album-art" src="assets/images/default-album.png" alt="Album Art">
+            <div class="track-info">
+                <h3 id="mini-track-title">Select a song</h3>
+                <p id="mini-track-artist">Unknown Artist</p>
+            </div>
+            <div class="controls">
+                <button id="mini-prev-btn"><img src="assets/icons/previous.svg" alt="Previous"></button>
+                <button id="mini-play-pause-btn"><img src="assets/icons/play.svg" alt="Play"></button>
+                <button id="mini-next-btn"><img src="assets/icons/next.svg" alt="Next"></button>
+            </div>
+        </footer>
+        <!-- Playlist Song Selection Modal -->
+        <div class="modal" id="playlist-modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Add Songs to Playlist</h3>
+                <ul id="modal-song-list" class="song-grid"></ul>
+                <div class="modal-actions">
+                    <button id="modal-cancel">Cancel</button>
+                    <button id="modal-confirm">Add Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="audio-player"></audio>
+    <script src="js/app.js"></script>
+</body>
+</html>
